@@ -5,6 +5,7 @@ import numpy as np
 from torch.utils.data.dataset import Dataset
 from torch.utils.data.dataloader import DataLoader
 import cv2
+from PIL import Image, ImageEnhance
 
 # Your Data Path
 img_dir = '/zhoukangkang/Paddle_2_3/PaddleTest/inference/python_api_test/test_int8_model/dataset/ILSVRC2012_val/val'
@@ -17,7 +18,6 @@ class MyDataset(Dataset):
         self.imgsz = imgsz
         # self.img_namelst 就是图片名字的列表
         self.img_namelst = os.listdir(self.img_dir)
-        print(self.img_namelst)
 
     # need to overload
     def __len__(self):
@@ -29,6 +29,8 @@ class MyDataset(Dataset):
             label = f.readline().strip()
         img = cv2.imread(os.path.join(img_dir, self.img_namelst[idx]))
         img = cv2.resize(img, self.imgsz)
+        print(img)
+        print(label)
         return img, label
 
 
